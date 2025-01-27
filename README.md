@@ -1,4 +1,28 @@
-# simple-tahu
+# Sparkplug-B MQTT5 Shared Subscription with ActiveMQ Artemis Diverts
+
+## Configuration
+
+Add this to your ActiveMQ Artemis `broker.xml`:
+
+```xml
+
+<diverts>
+    <divert name="shared">
+        <address>spBv1.0/group01/NDATA/+</address>
+        <forwarding-address>$share/share01/group01</forwarding-address>
+        <routing-type>PASS</routing-type>
+        <exclusive>false</exclusive>
+    </divert>
+</diverts>
+
+<!-- see https://activemq.apache.org/components/artemis/documentation/latest/mqtt.html#wildcard-subscriptions -->
+<wildcard-addresses>
+    <delimiter>/</delimiter>
+    <any-words>#</any-words>
+    <single-word>+</single-word>
+</wildcard-addresses>
+```
+---
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
